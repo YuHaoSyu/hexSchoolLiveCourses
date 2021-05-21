@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width , initial-scale=1.0" />
+    <title>六角學院線上課程</title>
+    <script src="./jquery.slim.min.js"></script>
+    <link href="./video-js-cdn.min.css" rel="stylesheet" />
+
+    <script src="./video.min.js"></script>
+    <script src="./videojs-contrib-hls.min.js"></script>
+    <style>
+     *,::after,::before{box-sizing:border-box}@media (prefers-reduced-motion:no-preference){:root{scroll-behavior:smooth}}body{margin:0;font-family:var(--bs-font-sans-serif);font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+.container,
+.container-fluid,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container, .container-sm {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container, .container-sm, .container-md {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container, .container-sm, .container-md, .container-lg {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container, .container-sm, .container-md, .container-lg, .container-xl {
+    max-width: 1140px;
+  }
+}.row{--bs-gutter-x:1.5rem;--bs-gutter-y:0;display:flex;flex-wrap:wrap;margin-top:calc(var(--bs-gutter-y) * -1);margin-right:calc(var(--bs-gutter-x)/ -2);margin-left:calc(var(--bs-gutter-x)/ -2)}.col-auto{flex:0 0 auto;width:auto}.col-1{flex:0 0 auto;width:8.3333333333%}.col-2{flex:0 0 auto;width:16.6666666667%}.col-3{flex:0 0 auto;width:25%}.col-4{flex:0 0 auto;width:33.3333333333%}.col-5{flex:0 0 auto;width:41.6666666667%}.col-6{flex:0 0 auto;width:50%}.col-7{flex:0 0 auto;width:58.3333333333%}.col-8{flex:0 0 auto;width:66.6666666667%}.col-9{flex:0 0 auto;width:75%}.col-10{flex:0 0 auto;width:83.3333333333%}.col-11{flex:0 0 auto;width:91.6666666667%}.col-12{flex:0 0 auto;width:100%}@media (min-width:1200px){.col-xl{flex:1 0 0%}.row-cols-xl-auto>*{flex:0 0 auto;width:auto}.row-cols-xl-1>*{flex:0 0 auto;width:100%}.row-cols-xl-2>*{flex:0 0 auto;width:50%}.row-cols-xl-3>*{flex:0 0 auto;width:33.3333333333%}.row-cols-xl-4>*{flex:0 0 auto;width:25%}.row-cols-xl-5>*{flex:0 0 auto;width:20%}.row-cols-xl-6>*{flex:0 0 auto;width:16.6666666667%}.col-xl-auto{flex:0 0 auto;width:auto}.col-xl-1{flex:0 0 auto;width:8.3333333333%}.col-xl-2{flex:0 0 auto;width:16.6666666667%}.col-xl-3{flex:0 0 auto;width:25%}.col-xl-4{flex:0 0 auto;width:33.3333333333%}.col-xl-5{flex:0 0 auto;width:41.6666666667%}.col-xl-6{flex:0 0 auto;width:50%}.col-xl-7{flex:0 0 auto;width:58.3333333333%}.col-xl-8{flex:0 0 auto;width:66.6666666667%}.col-xl-9{flex:0 0 auto;width:75%}.col-xl-10{flex:0 0 auto;width:83.3333333333%}.col-xl-11{flex:0 0 auto;width:91.6666666667%}.col-xl-12{flex:0 0 auto;width:100%}.offset-xl-0{margin-left:0}.offset-xl-1{margin-left:8.3333333333%}.offset-xl-2{margin-left:16.6666666667%}.offset-xl-3{margin-left:25%}.offset-xl-4{margin-left:33.3333333333%}.offset-xl-5{margin-left:41.6666666667%}.offset-xl-6{margin-left:50%}.offset-xl-7{margin-left:58.3333333333%}.offset-xl-8{margin-left:66.6666666667%}.offset-xl-9{margin-left:75%}.offset-xl-10{margin-left:83.3333333333%}.offset-xl-11{margin-left:91.6666666667%}.g-xl-0,.gx-xl-0{--bs-gutter-x:0}.g-xl-0,.gy-xl-0{--bs-gutter-y:0}.g-xl-1,.gx-xl-1{--bs-gutter-x:0.25rem}.g-xl-1,.gy-xl-1{--bs-gutter-y:0.25rem}.g-xl-2,.gx-xl-2{--bs-gutter-x:0.5rem}.g-xl-2,.gy-xl-2{--bs-gutter-y:0.5rem}.g-xl-3,.gx-xl-3{--bs-gutter-x:1rem}.g-xl-3,.gy-xl-3{--bs-gutter-y:1rem}.g-xl-4,.gx-xl-4{--bs-gutter-x:1.5rem}.g-xl-4,.gy-xl-4{--bs-gutter-y:1.5rem}.g-xl-5,.gx-xl-5{--bs-gutter-x:3rem}.g-xl-5,.gy-xl-5{--bs-gutter-y:3rem}}.vh-100{height:100vh!important}.list-group{display:flex;flex-direction:column;padding-left:0;margin-bottom:0;border-radius:.25rem}.list-group-numbered{list-style-type:none;counter-reset:section}.list-group-numbered>li::before{content:counters(section, '.') '. ';counter-increment:section}.list-group-item-action{width:100%;color:#495057;text-align:inherit}.list-group-item-action:focus,.list-group-item-action:hover{z-index:1;color:#495057;text-decoration:none;background-color:#f8f9fa}.list-group-item-action:active{color:#212529;background-color:#e9ecef}.list-group-item{position:relative;display:block;padding:.5rem 1rem;color:#212529;text-decoration:none;background-color:#fff;border:1px solid rgba(0,0,0,.125)}.list-group-item:first-child{border-top-left-radius:inherit;border-top-right-radius:inherit}.list-group-item:last-child{border-bottom-right-radius:inherit;border-bottom-left-radius:inherit}.list-group-item.disabled,.list-group-item:disabled{color:#6c757d;pointer-events:none;background-color:#fff}.list-group-item.active{z-index:2;color:#fff;background-color:#0d6efd;border-color:#0d6efd}.list-group-item+.list-group-item{border-top-width:0}.list-group-item+.list-group-item.active{margin-top:-1px;border-top-width:1px}.list-group-horizontal{flex-direction:row}.list-group-horizontal>.list-group-item:first-child{border-bottom-left-radius:.25rem;border-top-right-radius:0}.list-group-horizontal>.list-group-item:last-child{border-top-right-radius:.25rem;border-bottom-left-radius:0}.list-group-horizontal>.list-group-item.active{margin-top:0}.list-group-horizontal>.list-group-item+.list-group-item{border-top-width:1px;border-left-width:0}.list-group-horizontal>.list-group-item+.list-group-item.active{margin-left:-1px;border-left-width:1px}@media (min-width:576px){.list-group-horizontal-sm{flex-direction:row}.list-group-horizontal-sm>.list-group-item:first-child{border-bottom-left-radius:.25rem;border-top-right-radius:0}.list-group-horizontal-sm>.list-group-item:last-child{border-top-right-radius:.25rem;border-bottom-left-radius:0}.list-group-horizontal-sm>.list-group-item.active{margin-top:0}.list-group-horizontal-sm>.list-group-item+.list-group-item{border-top-width:1px;border-left-width:0}.list-group-horizontal-sm>.list-group-item+.list-group-item.active{margin-left:-1px;border-left-width:1px}}@media (min-width:768px){.list-group-horizontal-md{flex-direction:row}.list-group-horizontal-md>.list-group-item:first-child{border-bottom-left-radius:.25rem;border-top-right-radius:0}.list-group-horizontal-md>.list-group-item:last-child{border-top-right-radius:.25rem;border-bottom-left-radius:0}.list-group-horizontal-md>.list-group-item.active{margin-top:0}.list-group-horizontal-md>.list-group-item+.list-group-item{border-top-width:1px;border-left-width:0}.list-group-horizontal-md>.list-group-item+.list-group-item.active{margin-left:-1px;border-left-width:1px}}@media (min-width:992px){.list-group-horizontal-lg{flex-direction:row}.list-group-horizontal-lg>.list-group-item:first-child{border-bottom-left-radius:.25rem;border-top-right-radius:0}.list-group-horizontal-lg>.list-group-item:last-child{border-top-right-radius:.25rem;border-bottom-left-radius:0}.list-group-horizontal-lg>.list-group-item.active{margin-top:0}.list-group-horizontal-lg>.list-group-item+.list-group-item{border-top-width:1px;border-left-width:0}.list-group-horizontal-lg>.list-group-item+.list-group-item.active{margin-left:-1px;border-left-width:1px}}@media (min-width:1200px){.list-group-horizontal-xl{flex-direction:row}.list-group-horizontal-xl>.list-group-item:first-child{border-bottom-left-radius:.25rem;border-top-right-radius:0}.list-group-horizontal-xl>.list-group-item:last-child{border-top-right-radius:.25rem;border-bottom-left-radius:0}.list-group-horizontal-xl>.list-group-item.active{margin-top:0}.list-group-horizontal-xl>.list-group-item+.list-group-item{border-top-width:1px;border-left-width:0}.list-group-horizontal-xl>.list-group-item+.list-group-item.active{margin-left:-1px;border-left-width:1px}}@media (min-width:1400px){.list-group-horizontal-xxl{flex-direction:row}.list-group-horizontal-xxl>.list-group-item:first-child{border-bottom-left-radius:.25rem;border-top-right-radius:0}.list-group-horizontal-xxl>.list-group-item:last-child{border-top-right-radius:.25rem;border-bottom-left-radius:0}.list-group-horizontal-xxl>.list-group-item.active{margin-top:0}.list-group-horizontal-xxl>.list-group-item+.list-group-item{border-top-width:1px;border-left-width:0}.list-group-horizontal-xxl>.list-group-item+.list-group-item.active{margin-left:-1px;border-left-width:1px}}.list-group-flush{border-radius:0}.list-group-flush>.list-group-item{border-width:0 0 1px}.list-group-flush>.list-group-item:last-child{border-bottom-width:0}.list-group-item-primary{color:#084298;background-color:#cfe2ff}.list-group-item-primary.list-group-item-action:focus,.list-group-item-primary.list-group-item-action:hover{color:#084298;background-color:#bacbe6}.list-group-item-primary.list-group-item-action.active{color:#fff;background-color:#084298;border-color:#084298}.list-group-item-secondary{color:#41464b;background-color:#e2e3e5}.list-group-item-secondary.list-group-item-action:focus,.list-group-item-secondary.list-group-item-action:hover{color:#41464b;background-color:#cbccce}.list-group-item-secondary.list-group-item-action.active{color:#fff;background-color:#41464b;border-color:#41464b}.list-group-item-success{color:#0f5132;background-color:#d1e7dd}.list-group-item-success.list-group-item-action:focus,.list-group-item-success.list-group-item-action:hover{color:#0f5132;background-color:#bcd0c7}.list-group-item-success.list-group-item-action.active{color:#fff;background-color:#0f5132;border-color:#0f5132}.list-group-item-info{color:#055160;background-color:#cff4fc}.list-group-item-info.list-group-item-action:focus,.list-group-item-info.list-group-item-action:hover{color:#055160;background-color:#badce3}.list-group-item-info.list-group-item-action.active{color:#fff;background-color:#055160;border-color:#055160}.list-group-item-warning{color:#664d03;background-color:#fff3cd}.list-group-item-warning.list-group-item-action:focus,.list-group-item-warning.list-group-item-action:hover{color:#664d03;background-color:#e6dbb9}.list-group-item-warning.list-group-item-action.active{color:#fff;background-color:#664d03;border-color:#664d03}.list-group-item-danger{color:#842029;background-color:#f8d7da}.list-group-item-danger.list-group-item-action:focus,.list-group-item-danger.list-group-item-action:hover{color:#842029;background-color:#dfc2c4}.list-group-item-danger.list-group-item-action.active{color:#fff;background-color:#842029;border-color:#842029}.list-group-item-light{color:#636464;background-color:#fefefe}.list-group-item-light.list-group-item-action:focus,.list-group-item-light.list-group-item-action:hover{color:#636464;background-color:#e5e5e5}.list-group-item-light.list-group-item-action.active{color:#fff;background-color:#636464;border-color:#636464}.list-group-item-dark{color:#141619;background-color:#d3d3d4}.list-group-item-dark.list-group-item-action:focus,.list-group-item-dark.list-group-item-action:hover{color:#141619;background-color:#bebebf}.list-group-item-dark.list-group-item-action.active{color:#fff;background-color:#141619;border-color:#141619}.text-reset{color:inherit!important}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:500;line-height:1.2}.h1,h1{font-size:calc(1.375rem + 1.5vw)}@media (min-width:1200px){.h1,h1{font-size:2.5rem}}.h2,h2{font-size:calc(1.325rem + .9vw)}@media (min-width:1200px){.h2,h2{font-size:2rem}}.h3,h3{font-size:calc(1.3rem + .6vw)}@media (min-width:1200px){.h3,h3{font-size:1.75rem}}.h4,h4{font-size:calc(1.275rem + .3vw)}@media (min-width:1200px){.h4,h4{font-size:1.5rem}}.h5,h5{font-size:1.25rem}.h6,h6{font-size:1rem}.mb-0{margin-bottom:0!important}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #212529;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-outline-secondary {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.input-group-prepend,
+.input-group-append {
+  display: flex;
+}
+
+.input-group-prepend .btn,
+.input-group-append .btn {
+  position: relative;
+  z-index: 2;
+}
+
+.input-group-prepend .btn:focus,
+.input-group-append .btn:focus {
+  z-index: 3;
+}
+
+.input-group-prepend .btn + .btn,
+.input-group-prepend .btn + .input-group-text,
+.input-group-prepend .input-group-text + .input-group-text,
+.input-group-prepend .input-group-text + .btn,
+.input-group-append .btn + .btn,
+.input-group-append .btn + .input-group-text,
+.input-group-append .input-group-text + .input-group-text,
+.input-group-append .input-group-text + .btn {
+  margin-left: -1px;
+}
+
+.input-group-prepend {
+  margin-right: -1px;
+}
+
+.input-group-append {
+  margin-left: -1px;
+}
+
+.input-group > .form-control,
+.input-group > .form-control-plaintext,
+.input-group > .custom-select,
+.input-group > .custom-file {
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+  margin-bottom: 0;
+}
+.input-group > .input-group-prepend > .btn,
+.input-group > .input-group-prepend > .input-group-text,
+.input-group:not(.has-validation) > .input-group-append:not(:last-child) > .btn,
+.input-group:not(.has-validation) > .input-group-append:not(:last-child) > .input-group-text,
+.input-group.has-validation > .input-group-append:nth-last-child(n + 3) > .btn,
+.input-group.has-validation > .input-group-append:nth-last-child(n + 3) > .input-group-text,
+.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group > .input-group-append > .btn,
+.input-group > .input-group-append > .input-group-text,
+.input-group > .input-group-prepend:not(:first-child) > .btn,
+.input-group > .input-group-prepend:not(:first-child) > .input-group-text,
+.input-group > .input-group-prepend:first-child > .btn:not(:first-child),
+.input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-5 col-xl-3 vh-100" style="overflow-y: auto">
+          <ul class="list-group" id="playlist-group">
+            <li class="list-group-item active">
+              <a class="text-reset" href="#"> Apple M1 觀看公告</a>
+            </li>
+            <li class="list-group-item">
+              <h2 class="h6 mb-0">Node.js + Express Web 應用程式教學</h2>
+            </li>
+            <li class="list-group-item"><a href="#"> 線上講義</a></li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/906ad71969221aea8dbb96cc7482a226196cd9f8.m3u8"
+              >
+                環境建置 (12:04)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/f552b2b21affaa3448e65be78d3037b06c009b28.m3u8"
+              >
+                開啟 web 伺服器 (17:10)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/835b0e5b39a7c3f4f4c6d7d7bb0d512cc4fc07a8.m3u8"
+              >
+                將網站部署到 Heroku 主機 (4:12)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/bafd27ce8b5ade3ac67c3630ae4c945b1742dc13.m3u8"
+              >
+                NPM 套件管理教學 (5:28)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/173bed007734376f75eb41433fe09ccf51ef3f9f.m3u8"
+              >
+                Express Web 框架環境建立 (12:32)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/17c9189301a454397387f3c4594c17e86d561218.m3u8"
+              >
+                常見網址、路徑、參數介紹 (13:59)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/954921bf9ffc2b26251955e435dfaae976d445aa.m3u8"
+              >
+                學員練習 - YouTube 路由設定 (6:06)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/8fd7cec04136c51c651807c0b0a3493b78595002.m3u8"
+              >
+                學員練習 - IT鐵人邦 (6:17)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/aa17776b004b73a3e6e2e9eee3689c9b231069c0.m3u8"
+              >
+                常見 QA (8:57)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/07b943428fa5ca89a25d76faad87dae81f690835.m3u8"
+                >如何判斷後端工程師用得是 Server Side Render 還是 Client Side
+                Render(81:04)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/9ba7f4dc47b569cb1e7988e9517b127ee427ef57.m3u8"
+              >
+                JS Functional Programming (97:28)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/393be0c3fe0eaa11109d9e8c8784e22f4d26f232.m3u8"
+              >
+                Webpack 上半集 (124:58)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/7ec92dc267cf642860af6b663b5161da7643858f.m3u8"
+              >
+                Webpack 下半集 (112:01)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/46fe0e079774dc092775459ddece9610b9b0ee9f.m3u8"
+              >
+                Leaflet + OpenStreetMap 地圖應用開發 (115:11)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a href="#"> 我們與 JavaScript 測試的距離-說明</a>
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/cafc25f9b1272f428ebfeacf86bf4b3988b10b37.m3u8"
+              >
+                工程師都該理解的 UX 心法 (91:11)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/f69acebc2cd6ebcda76c57e3b001289ae85eb680.m3u8"
+              >
+                軟體工程師如何切入區塊鏈市場 (91:45)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/955d075c9113eca62f12037b7ed78ce35a0a2c9e.m3u8"
+              >
+                非同步、Event Queue、AJAX 教學 (91:45)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/be19145031c19b3a06064efb3aaf926f79e37c5e.m3u8"
+              >
+                JS Promise 實戰教學 (85:08)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/824cb8484da93a9531de2d1b446adc999cfd4b78.m3u8"
+              >
+                React 從新手到實戰 I (85:15)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/d6c81aa21be69f9b3746e16c20f4c9e599b73e2c.m3u8"
+              >
+                React 從新手到實戰 II (93:00)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/4d36f509dc0b8922df3833500ac68e137b337b01.m3u8"
+              >
+                React 從新手到實戰 III (87:55)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/9dd9b64ae1fb9a8320857dc2ed633f8423824c14.m3u8"
+              >
+                行動指南阿康 - 上 (58:33)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/fbf513335c70734b6da14a77dc367feb9866f252.m3u8"
+              >
+                行動指南阿康 - 下 (70:24)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/fa9757a3d4b1de985e2308673bcb821f4f84fbfb.m3u8"
+              >
+                從基礎 Python 帶你學會寫爬蟲 I (128:27)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/bc85682747f76867c9f5d11791b7289774baaff6.m3u8"
+              >
+                從基礎 Python 帶你學會寫爬蟲 II (132:08)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/9c165a375be62e950ff5746dc604e5786c59f523.m3u8"
+              >
+                用 Python 理財：打造自己的 AI 股票理專 (92:08)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/4f2b4795a510902e3089c3d0afb096c0b3e3092c.m3u8"
+              >
+                Linux 我來教: CentOS/ RHEL 8 新世代雲端 (88:35)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/2dade35062076ade17f0a3d8d916b9cbb6c95b55.m3u8"
+              >
+                動手搞定GCP部署工作 (102:05)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/2dade35062076ade17f0a3d8d916b9cbb6c95b55.m3u8"
+              >
+                Docker (88:20)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a href="#"> JavaScript 單元測試</a>
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/eeb899accfa63a6e7310eaed75b262e551b7bae7.m3u8"
+              >
+                直播影片 (79:23)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/52da23a6c72c9202290cc399a4ef45b8be9316e7.m3u8"
+              >
+                JS 環境建立與變數介紹 (101:36)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/ba214acc67ce1c811dacd0341677353d0db9c944.m3u8"
+              >
+                DOM、function 函式與監聽 (96:31)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/d0fa79ff882201777e058318c4d6b860add6e750.m3u8"
+              >
+                陣列與物件、forEach (136:29)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/266a1075c52c11c0233768793b93374706470bdc.m3u8"
+              >
+                AJAX 與資料處理 (90:37)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/a945fea7170124fcd5ed93b142c87b67a388b472.m3u8"
+              >
+                用履歷打造你的個人品牌 (96:30)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/7f177e558ecd8028fd7ce3450d6d6b8597747a27.m3u8"
+              >
+                Dialogflow with LINE Bot & Action On Google (92:30)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/16daa3098b16064533e00ebfe3bf8482843576c7.m3u8"
+              >
+                打造出高轉換率的 Landing page 不求人 (90:34)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/5df523e96a4838e75531f81257111e6b6bd5a7eb.m3u8"
+              >
+                密碼學中的 Encode、Encrypt 跟 Hash 差異 (98:35)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/91c322081d5eeae0c249dde1b04666bf44a62855.m3u8"
+                >vue/nuxt 開發初體驗 -使用 nuxt 快速打造現代SPA 網站 (108:57)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/b2d6f49952b9d60cd5118bcbc2c2f057c9ddcd92.m3u8"
+              >
+                Android 開發學習經驗分享 (84:45)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/203c9e225d63483fb1366c1a428966bf63d44cc8.m3u8"
+              >
+                掌握商業邏輯與分析技巧，成為更棒的軟體工程師 (87:40)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/cdd410d1fec597269302114898c8aef886db5f82.m3u8"
+              >
+                如何成為 iOS App 魔法師 & SwiftUI App 初體驗 (87:35)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/c2302765753607cf6f90e2b0b7891516fc091b7a.m3u8"
+              >
+                LINEbot 與工程師的日常 (87:01)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/897716c604ccd9cca98e294917cfe62c72d4284e.m3u8"
+              >
+                Angular 從入門到實戰 - Hello Angular (87:18)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/901a0143fdef9342e6bee3bf50f6f8e33f627686.m3u8"
+              >
+                Angular 從入門到實戰 - 核心八元素（上） (100:05)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/8313db45169623537fd841d97e26a629e04b9378.m3u8"
+              >
+                Angular 從入門到實戰 - 核心八元素（下） (98:30)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/fe637cd1ffb70440a606f45891fc040b3ef7803d.m3u8"
+              >
+                Angular 從入門到實戰 - 路由 (101:30)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/407f22bea7b592c97b043a9c1f8d811b920d9942.m3u8"
+              >
+                職涯百百問 / 人生規劃大於職涯規劃 (102:18)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/9db5d08737b85b875d35e6e77222c168fe189e59.m3u8"
+              >
+                建立你的虛擬貨幣與使用者介面 (147:12)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/97ef21b022858d1be8179e61deeea40c3382224b.m3u8"
+              >
+                用 CI/CD 來測試加自動部署吧！ (106:58)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/238981b4736f5a48cc564c807059fa67236cfd9d.m3u8"
+              >
+                不小心寫了漏洞？前端資安概念與實戰分享 (140:51)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/d0d152396105a5103f90d00b26a57b2fd6c4ac6c.m3u8"
+              >
+                從前端到全端，從台灣到矽谷 (140:06)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/20ce35251ec87774056d7ec66489e0dafb882f75.m3u8"
+              >
+                C# 的 Type 和 Operator (117:53)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/3ae5799a058c7db8c17da25d0a899386e3a22bb7.m3u8"
+              >
+                C# 物件導向 (134:42)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/fd99ccc84f9a2eec0eeba60d668e87a494127e00.m3u8"
+              >
+                從 Hooks 開始讓你的網頁 React 起來 (102:40)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/2a7b12242bddc98cb720258c136ea480622608b0.m3u8"
+              >
+                和艦長一起玩轉 GitLab & GitLab Workflow (110:32)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/43c51799ed455c77dca1c87b729269fd7cd29e60.m3u8"
+              >
+                Pixi.js V5 超入門學習 (87:28)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/0831b65e4b5d804ff2261782dfb9b02242edf74a.m3u8"
+              >
+                10 個 Vue3 開發上面的小細節 (117:55)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/31f472cd1a0b7ce9e2408738b48ab32399e46464.m3u8"
+              >
+                多想兩分鐘，你可以不必用 Vuex (146:25)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/7ae39df684841a9f162645dcfdb2a2ed6b1404a7.m3u8"
+              >
+                新手向，從零認識 Vue 3 (89:42)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/6603b8b6f2e846f44462f2d123f6066b0bf1d8bc.m3u8"
+              >
+                玩轉邏輯，像遊戲一樣簡單的基礎演算法 (103:32)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a href="#"> 大神來六角 2021 (分界線)</a>
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/b3d6c107c3145572005b647b5641058f07592513.m3u8"
+              >
+                面試常見技術問題 [卡斯伯] (100:32)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/6287add1552f66f3d32a4d30a2ec25f8cd3db8b5.m3u8"
+              >
+                前端求職職涯諮詢[洧杰] (142:30)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/714d02e3db2c12e040cd2ba684b3689d8cb1602d.m3u8"
+              >
+                該怎麼玩 CSS? (74:39)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/69559346f78fa579e6ea5e53dfdce8bf2d9da196.m3u8"
+              >
+                轉職經驗分享 feat. Hinrick (64:49)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/83599de47d2864cfb66f1d0943bb4c5182eb0355.m3u8"
+              >
+                一起來認識不同的 CSS 選擇器吧 (81:15)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/8f11caff455813fa508264b3238571e4ff3f3bdf.m3u8"
+              >
+                如何轉職前端工程師、人生/職涯規劃 (101:14)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/7ea7c51c3e96bf6628d961c0df07b5cadcb76093.m3u8"
+              >
+                創立工作室的大小事 feat. 極熊設計共同創辦人子喬 (81:28)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/3789959e40d8ababa23d1d48e1971fe0fc79c024.m3u8"
+              >
+                遠端開發經驗分享 feat. Ryder (71:02)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/f4b0872302973a6c13591199115aa51c3f5c9752.m3u8"
+              >
+                ES6, 7, 8, 9, 10, 11 中，用一次就上癮的語法 (82:56)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/3c6a164a74b3bfb9b409f52350ac14ac7f0e6f0f.m3u8"
+              >
+                架設自己的部落格超 Easy! (62:24)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/3d618ec65364978c826f6149f3583e1dcb6d21ed.m3u8"
+              >
+                自動部署好簡單 - CI/CD 入門 (39:03)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/581be3807bc8fd18bd3e6ff6c1416702c708fc1c.m3u8"
+              >
+                產品 PM 的經驗談 (82:35)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/c81ef300e8ff3199b9fe7ce870dce7d4d22146c2.m3u8"
+              >
+                破釜沉舟的轉職路 - 從零開始成為一個軟體工程師 (103:07)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/a5898e2a290e9ae81c5f711293da30e424b71b19.m3u8"
+              >
+                Scrum 經驗分享 feat. 鈦坦工程師 (127:46)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/70b82ac45beb37af6b4f33055e6c88d5c87ea91e.m3u8"
+                >當專案開發到一個階段，搭配 GitHub Actions 建立一套 CI/CD
+                系統(86:31)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/65893c604e3dc5a66219ae0d24b7f70fcd2b9163.m3u8"
+              >
+                不再害怕面試白板題！超圖解・一次搞懂演算法！ (73:12)</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="col-7 col-xl-9">
+          <video
+            id="video"
+            class="video-js vjs-default-skin"
+            preload="none"
+            crossorigin="true"
+            style="width: 100%"
+            controls
+          >
+            <source
+              id="source"
+              src="https://embedwistia-a.akamaihd.net/deliveries/906ad71969221aea8dbb96cc7482a226196cd9f8.m3u8"
+              type="application/x-mpegURL"
+            />
+          </video>
+          <div class="row no-gutters">
+            <div class="col-4">
+
+              <div class="input-group mb-3">
+                <input id="speed" type="text" class="form-control" placeholder="playbackRate" aria-label="playbackRate" aria-describedby="button-addon2" value="2">
+                <div class="input-group-append">
+                  <button id="playbackRate" class="btn btn-outline-secondary" type="button" id="button-addon2">Confirm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const list = document.getElementById('playlist-group')
+      const video = document.getElementById('video')
+
+      video.height = video.clientWidth * 0.6
+      const player = videojs('video')
+
+      list.addEventListener('click', function (e) {
+        if (e.target.nodeName !== 'A') return
+        e.preventDefault()
+        const a = e.target
+        Array.prototype.forEach.call(this.children, function (LI) {
+          LI.classList.remove('active')
+          LI.children[0].classList.remove('text-reset')
+          if (LI === a.parentNode && a.href !== '#') {
+            LI.classList.add('active')
+            a.classList.add('text-reset')
+            player.src({ type: 'application/x-mpegURL', src: a.href })
+            player.play()
+          }
+        })
+      })
+      document.getElementById('playbackRate').addEventListener('click', function(e){
+        document.querySelector('video').playbackRate = document.getElementById('speed').value
+      })
+    </script>
+  </body>
+</html>
