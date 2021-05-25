@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width , initial-scale=1.0" />
-    <title>六角學院線上課程</title>
+    <title>線上課程</title>
     <script src="./jquery.slim.min.js"></script>
     <link href="./video-js-cdn.min.css" rel="stylesheet" />
 
@@ -584,18 +584,29 @@
               type="application/x-mpegURL"
             />
           </video>
-          <div class="row no-gutters mt-2">
+          <div class="row mt-2 flex-column">
             <div class="col-xl-4">
               <div class="input-group mb-3">
                 <div class="input-group">
                   <span class="input-group-text">Speed</span>
-                  <input id="speed" type="number" class="form-control" step="0.2" value="1.5">
+                  <input id="speed" type="number" class="form-control" step="0.2" max="16" value="1.5" min="0">
                   <button id="playbackRate" class="btn btn-outline-secondary" type="button">Confirm</button>
                   <button id="reset" class="btn btn-outline-secondary" type="button">Reset</button>
                   <a class="btn btn-outline-secondary" href="./tree.html" target="_blank">Tree</a>
                 </div>
               </div>
+
+
             </div>
+            <div class="col-xl-2">
+              <div class="input-group mb-3">
+              <div class="input-group">
+
+                <button id="back" class="btn btn-outline-secondary" type="button"><Reset><</button>
+                <input id="current" type="number" class="form-control" step="10" min="0" value="5">
+                <button id="forward" class="btn btn-outline-secondary" type="button">></button>
+              </div>
+            </div></div>
           </div>
         </div>
       </div>
@@ -629,6 +640,37 @@
       document.getElementById('reset').addEventListener('click', function(e){
         document.querySelector('video').playbackRate = 1.5
         document.getElementById('speed').value=1.5
+      })
+      const current = document.getElementById('current')
+      function videoTrackPlus(){
+        video.currentTime+= +current.value
+      }
+      function videoTrackMinus(){
+        video.currentTime-= +current.value
+      }
+
+      document.getElementById('back').addEventListener('click', videoTrackMinus)
+      document.getElementById('forward').addEventListener('click',videoTrackPlus)
+      window.addEventListener('keyup',function(e){
+        e.preventDefault()
+        let evt = new Event('click')
+        switch (e.key) {
+          case "ArrowUp":
+          current.value = +current.step  + +current.value
+          break;
+          case "ArrowDown":
+          current.value = +current.step  - +current.value
+          current.value<0 &&(current.value=0)
+          break;
+          case "ArrowLeft":
+          document.getElementById('back').dispatchEvent(evt)
+            break;
+            case "ArrowRight":
+            document.getElementById('forward').dispatchEvent(evt)
+            break;
+          default:
+            break;
+        }
       })
     </script>
   </body>
