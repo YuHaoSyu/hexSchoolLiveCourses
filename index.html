@@ -614,7 +614,7 @@
         Array.prototype.forEach.call(this.children, function (LI) {
           LI.classList.remove('active')
           LI.children[0].classList.remove('text-reset')
-          if (LI === a.parentNode && !a.href.includex('https')) {
+          if (LI === a.parentNode && !a.href.includes('https')) {
             e.preventDefault()
             LI.classList.add('active')
             a.classList.add('text-reset')
