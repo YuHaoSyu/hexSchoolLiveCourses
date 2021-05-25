@@ -18,9 +18,7 @@
         <div class="col-5 col-xl-3 vh-100" style="overflow-y: auto">
           <ul class="list-group" id="playlist-group">
 
-            <li class="list-group-item">
-            <a href="./tree.html" target="_blank">學系路線</a>
-            </li>
+
             <li class="list-group-item"><a href="#"> 線上講義</a></li>
             <li class="list-group-item">
               <a
@@ -586,13 +584,15 @@
               type="application/x-mpegURL"
             />
           </video>
-          <div class="row no-gutters">
-            <div class="col-4">
-
+          <div class="row no-gutters mt-2">
+            <div class="col-xl-4">
               <div class="input-group mb-3">
-                <input id="speed" type="text" class="form-control" placeholder="playbackRate" aria-label="playbackRate" aria-describedby="button-addon2" value="2">
-                <div class="input-group-append">
-                  <button id="playbackRate" class="btn btn-outline-secondary" type="button" id="button-addon2">Confirm</button>
+                <div class="input-group">
+                  <span class="input-group-text">Speed</span>
+                  <input id="speed" type="number" class="form-control" step="0.2" value="1.5">
+                  <button id="playbackRate" class="btn btn-outline-secondary" type="button">Confirm</button>
+                  <button id="reset" class="btn btn-outline-secondary" type="button">Reset</button>
+                  <a class="btn btn-outline-secondary" href="./tree.html" target="_blank">Tree</a>
                 </div>
               </div>
             </div>
@@ -614,7 +614,7 @@
         Array.prototype.forEach.call(this.children, function (LI) {
           LI.classList.remove('active')
           LI.children[0].classList.remove('text-reset')
-          if (LI === a.parentNode && !a.href.includes('https')) {
+          if (LI === a.parentNode && a.href!=='#') {
             e.preventDefault()
             LI.classList.add('active')
             a.classList.add('text-reset')
@@ -625,6 +625,10 @@
       })
       document.getElementById('playbackRate').addEventListener('click', function(e){
         document.querySelector('video').playbackRate = document.getElementById('speed').value
+      })
+      document.getElementById('reset').addEventListener('click', function(e){
+        document.querySelector('video').playbackRate = 1.5
+        document.getElementById('speed').value=1.5
       })
     </script>
   </body>
