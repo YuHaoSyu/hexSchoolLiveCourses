@@ -16,7 +16,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-5 col-xl-3 vh-100" style="overflow-y: auto">
-          <ul class="list-group" id="playlist-group">
+          <ul class="list-group" id="unorderedlist">
 
 
             <li class="list-group-item"><a href="#"> 線上講義</a></li>
@@ -227,15 +227,9 @@
               >
             </li>
             <li class="list-group-item">
-              <a href="#"> JavaScript 單元測試</a>
+              <a href="https://embed-fastly.wistia.com/deliveries/eeb899accfa63a6e7310eaed75b262e551b7bae7.m3u8"> JavaScript 單元測試</a>
             </li>
-            <li class="list-group-item">
-              <a
-                href="https://embed-fastly.wistia.com/deliveries/eeb899accfa63a6e7310eaed75b262e551b7bae7.m3u8"
-              >
-                直播影片 (79:23)</a
-              >
-            </li>
+
             <li class="list-group-item">
               <a
                 href="https://embed-fastly.wistia.com/deliveries/52da23a6c72c9202290cc399a4ef45b8be9316e7.m3u8"
@@ -560,11 +554,32 @@
                 系統(86:31)</a
               >
             </li>
-            <li class="list-group-item">
+                        <li class="list-group-item">
               <a
-                href="https://embed-fastly.wistia.com/deliveries/65893c604e3dc5a66219ae0d24b7f70fcd2b9163.m3u8"
+                href="https://embed-fastly.wistia.com/deliveries/2753a7b15e57a86245d28953390d5506ff0f9ec3.m3u8"
               >
                 不再害怕面試白板題！超圖解・一次搞懂演算法！ (73:12)</a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/a029102be58defffad0d710222e92d5ca3b828b6.m3u8"
+              > vite2: Make web dev fast again & again.(114:05)
+            </a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embedwistia-a.akamaihd.net/deliveries/6f98936905196bff3d34396337012447de47f312.m3u8"
+              >前端上雲端，開發變高端: AWS+GCP (79:46)
+            </a
+              >
+            </li>
+            <li class="list-group-item">
+              <a
+                href="https://embed-fastly.wistia.com/deliveries/dfac7b6ab9b1a35c480e1c49de06ab301c43e485.m3u8"
+              >網站開發入門你該注意的事(80:53)
+            </a
               >
             </li>
           </ul>
@@ -612,65 +627,149 @@
       </div>
     </div>
     <script>
-      const list = document.getElementById('playlist-group')
       const video = document.getElementById('video')
-
+      const current = document.getElementById('current')
       video.height = video.clientWidth * 0.6
       const player = videojs('video')
 
-      list.addEventListener('click', function (e) {
-        if (e.target.nodeName !== 'A') return
+      // document.getElementById('playlist-group').addEventListener('click', function(e)
+      // {
+      //     if (e.target.nodeName !== 'A') return
 
-        const a = e.target
-        Array.prototype.forEach.call(this.children, function (LI) {
-          LI.classList.remove('active')
-          LI.children[0].classList.remove('text-reset')
-          if (LI === a.parentNode && a.href!=='#') {
-            e.preventDefault()
-            LI.classList.add('active')
-            a.classList.add('text-reset')
-            player.src({ type: 'application/x-mpegURL', src: a.href })
-            player.play()
+      //     const a = e.target
+      //     Array.prototype.forEach.call(this.children, function(LI)
+      //     {
+      //         LI.classList.remove('active')
+      //         LI.children[0].classList.remove('text-reset')
+      //         if (LI === a.parentNode && a.href !== '#')
+      //         {
+      //             e.preventDefault()
+      //             LI.classList.add('active')
+      //             a.classList.add('text-reset')
+      //             player.src(
+      //             {
+      //                 type: 'application/x-mpegURL',
+      //                 src: a.href
+      //             })
+      //             player.play()
+      //         }
+      //     })
+      // })
+      // document.getElementById('playbackRate').addEventListener('click', function(e)
+      // {
+      //     document.querySelector('video').playbackRate = document.getElementById('speed').value
+      // })
+
+      // document.getElementById('reset').addEventListener('click', function(e)
+      // {
+      //     document.querySelector('video').playbackRate = 1.5
+      //     document.getElementById('speed').value = 1.5
+      // })
+
+      // document.getElementById('back').addEventListener('click', function(e)
+      // {
+      //     video.currentTime -= +current.value
+      // })
+
+      // document.getElementById('forward').addEventListener('click', function(e)
+      // {
+      //     video.currentTime += +current.value
+      // })
+
+      const events = {
+  click:
+  {
+      unorderedlist(e)
+      {
+          if (e.target.nodeName !== 'A') return
+
+          const A = e.target
+          Array.prototype.forEach.call(this.children, function(LI)
+          {
+              LI.classList.remove('active')
+              LI.children[0].classList.remove('text-reset')
+              if (LI === A.parentNode && A.href !== '#')
+              {
+                  e.preventDefault()
+                  LI.classList.add('active')
+                  A.classList.add('text-reset')
+                  player.src(
+                  {
+                      type: 'application/x-mpegURL',
+                      src: A.href
+                  })
+                  player.play()
+              }
+          })
+      },
+
+      playbackRate(e)
+      {
+          video.playbackRate = document.getElementById('speed').value
+      },
+      reset(e)
+      {
+          video.playbackRate = 1.5
+          document.getElementById('speed').value = 1.5
+      },
+
+      back()
+      {
+          video.currentTime -= +current.value
+      },
+      forward()
+      {
+          video.currentTime += +current.value
+      },
+
+  }
+}
+
+for (const event in events)
+{
+  for (const [id, handler] of Object.entries(events[event]))
+  { console.log(id)
+      document.getElementById(id).addEventListener(event, handler)
+  }
+}
+
+      window.addEventListener('keydown', function(e)
+      {
+          e.preventDefault()
+      })
+
+      window.addEventListener('keyup', function(e)
+      {
+          e.preventDefault()
+          // console.log(e)
+          let evt = new Event('click')
+          switch (e.code)
+          {
+              case "ArrowUp":
+                  current.value = +current.step + +current.value
+                  break;
+              case "ArrowDown":
+                  current.value = +current.step - +current.value
+                  current.value < 0 && (current.value = 0)
+                  break;
+              case "ArrowLeft":
+                  document.getElementById('back').dispatchEvent(evt)
+                  break;
+              case "ArrowRight":
+                  document.getElementById('forward').dispatchEvent(evt)
+                  break;
+              case "Space":
+
+                  if (video.paused)
+                  {
+                      video.play()
+                      return
+                  }
+                  video.pause()
+                  break;
+              default:
+                  break;
           }
-        })
-      })
-      document.getElementById('playbackRate').addEventListener('click', function(e){
-        document.querySelector('video').playbackRate = document.getElementById('speed').value
-      })
-      document.getElementById('reset').addEventListener('click', function(e){
-        document.querySelector('video').playbackRate = 1.5
-        document.getElementById('speed').value=1.5
-      })
-      const current = document.getElementById('current')
-      function videoTrackPlus(){
-        video.currentTime+= +current.value
-      }
-      function videoTrackMinus(){
-        video.currentTime-= +current.value
-      }
-
-      document.getElementById('back').addEventListener('click', videoTrackMinus)
-      document.getElementById('forward').addEventListener('click',videoTrackPlus)
-      window.addEventListener('keyup',function(e){
-        e.preventDefault()
-        let evt = new Event('click')
-        switch (e.key) {
-          case "ArrowUp":
-          current.value = +current.step  + +current.value
-          break;
-          case "ArrowDown":
-          current.value = +current.step  - +current.value
-          current.value<0 &&(current.value=0)
-          break;
-          case "ArrowLeft":
-          document.getElementById('back').dispatchEvent(evt)
-            break;
-            case "ArrowRight":
-            document.getElementById('forward').dispatchEvent(evt)
-            break;
-          default:
-            break;
-        }
       })
     </script>
   </body>
